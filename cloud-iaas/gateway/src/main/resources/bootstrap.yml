@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    config: #配置文件的信息
+      label: master
+      name: gateway
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-server
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启网关的动态路由
+          lower-case-service-id: true
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER:http://admin:admin@localhost:8761/eureka}
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: ${HOST:localhost}
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}  # 显示服务名称
+    prefer-ip-address: ${PREFER_IP_ADDRESS:true}
+    lease-renewal-interval-in-seconds: 3 # 续约实例的时间
+    lease-expiration-duration-in-seconds: 9  # 剔除节点的时间
+  server:
+    response-cache-auto-expiration-in-seconds: 30 # 设置eureka-server向client响应的缓存列表的时间

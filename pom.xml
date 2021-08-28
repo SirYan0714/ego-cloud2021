@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>cloud-iaas</module>
+        <module>cloud-iaas/gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
